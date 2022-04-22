@@ -1,4 +1,9 @@
 const loadSearchResult = async () => {
+    // clear data
+    document.getElementById('display-phones').textContent = '';
+    document.getElementById('single-phone-details').textContent = '';
+
+    //get search field
     const searchResult = document.getElementById('search-field');
     const searchText = searchResult.value;
 
@@ -12,8 +17,8 @@ const loadSearchResult = async () => {
 };
 
 const displayPhones = phones => {
-    const phonesContainer = document.getElementById('display-phones');
-    phonesContainer.textContent = ''
+    const phonesCards = document.getElementById('display-phones');
+    phonesCards.textContent = ''
 
     phones.forEach(phone => {
         const div = document.createElement('div');
@@ -22,19 +27,44 @@ const displayPhones = phones => {
         <div class="card">
             <img src="${phone.image}" class="card-img-top mx-auto mt-2 dp-img" alt="...">
             <div class="card-body">
-            <h5 class="card-title">${phone.phone_name}</h5>
-            <p class="card-text">Brand Name: ${phone.brand}</p>
+                <h5 class="card-title">${phone.phone_name}</h5>
+                <p class="card-text">Brand Name: ${phone.brand}</p>
+                <button onclick="loadPhoneDetails('${phone.slug}')" type="button" class="btn btn-primary">Get Details</button>
             </div>
-            <button onclick="loadPhoneDetails('${phone.slug}')" type="button" class="btn btn-primary">Get Details</button>
         </div>
         `;
-        phonesContainer.appendChild(div);
+        phonesCards.appendChild(div);
     });
 };
 
-const loadPhoneDetails = async phoneDetails => {
-    const url = `https://openapi.programming-hero.com/api/phone/${phoneDetails}`;
+const loadPhoneDetails = async phoneId => {
+    const url = `https://openapi.programming-hero.com/api/phone/${phoneId}`;
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data);
+    displayPhoneDetails(data.data);
+};
+
+const displayPhoneDetails = phoneDetails => {
+    const phoneDetailsCard = document.getElementById('single-phone-details');
+    phoneDetailsCard.textContent = '';
+
+    phoneDetailsCard.innerHTML = `
+        <div class="card mb-5 mx-auto">
+            <img src="${phoneDetails.image}" class="card-img-top mx-auto mt-2 dp-img" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">${phoneDetails.name}</h5>
+                <p class="card-text">Brand Name: ${phoneDetails.brand}</p>
+                <h6 class="card-text">Main Features:</h6>
+                <ul>
+                    <li>Chipset: ${phoneDetails.mainFeatures.chipSet}</li>
+                    <li>Display Size: ${phoneDetails.mainFeatures.displaySize}</li>
+                    <li>Memory: ${phoneDetails.mainFeatures.memory}</li>
+                    <li>Sensors: ${phoneDetails.mainFeatures.sensors[0]}, ${phoneDetails.mainFeatures.sensors[1]}, ${phoneDetails.mainFeatures.sensors[2]}, ${phoneDetails.mainFeatures.sensors[3]}, ${phoneDetails.mainFeatures.sensors[4]}, ${phoneDetails.mainFeatures.sensors[5]}</li>
+                    <li>Storage: ${phoneDetails.mainFeatures.storage}</li>
+                </ul>
+                <h6 class="card-text">Others:</h6>
+                <p class="card-text">${phoneDetails.others}</p>
+            </div>
+        </div>
+    `;
 };
