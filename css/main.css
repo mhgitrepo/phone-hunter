@@ -1,0 +1,10 @@
+body{
+    overflow-x: hidden;
+}
+
+/* For Display Phones */
+
+.dp-img{
+    width: 150px;
+    height: 200px;
+}
