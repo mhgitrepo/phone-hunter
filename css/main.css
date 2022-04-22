@@ -2,6 +2,14 @@ body{
     overflow-x: hidden;
 }
 
+/* Error Message */
+#empty-string{
+    display: none;
+}
+#wrong-keyword{
+    display: none;
+}
+
 /* For Display Phones */
 
 .dp-img{

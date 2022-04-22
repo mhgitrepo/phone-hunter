@@ -16,10 +16,19 @@
     </section>
     
     <!-- Search Field -->
-    <section class="input-group mx-auto mt-4 mb-5 w-25">
+    <section class="input-group mx-auto mt-4 mb-3 w-25">
         <input id="search-field" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
         <button onclick="loadSearchResult()" class="btn btn-outline-secondary" type="button" id="button-addon2">Get Your Phone</button>
     </section>
+
+    <!-- Error Message -->
+    <section id="empty-string">
+        <p class="text-center text-danger">Please type your phone name to get details.</p>
+    </section>
+    <section id="wrong-keyword">
+        <p class="text-center text-danger">Wooh! Worng Keyword!</p>
+    </section>
+
     <!-- Display Single Phone Details -->
     <section id="single-phone-details" class="row row-cols-1 row-cols-md-2 g-4"></section>
 
@@ -27,7 +36,7 @@
 
 
     <!-- Display Phones -->
-    <section id="display-phones" class="row row-cols-1 row-cols-md-2 g-4 w-50 mx-auto"></section>
+    <section id="display-phones" class="row row-cols-1 row-cols-md-2 g-4 w-50 mx-auto mt-4"></section>
 
     <!-- Bootstrap Script CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
