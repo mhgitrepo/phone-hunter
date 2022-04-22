@@ -22,11 +22,19 @@ const displayPhones = phones => {
         <div class="card">
             <img src="${phone.image}" class="card-img-top mx-auto mt-2 dp-img" alt="...">
             <div class="card-body">
-            <h5 class="card-title"></h5>
-            <p class="card-text"></p>
+            <h5 class="card-title">${phone.phone_name}</h5>
+            <p class="card-text">Brand Name: ${phone.brand}</p>
             </div>
+            <button onclick="loadPhoneDetails('${phone.slug}')" type="button" class="btn btn-primary">Get Details</button>
         </div>
         `;
         phonesContainer.appendChild(div);
     });
+};
+
+const loadPhoneDetails = async phoneDetails => {
+    const url = `https://openapi.programming-hero.com/api/phone/${phoneDetails}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(data);
 };
