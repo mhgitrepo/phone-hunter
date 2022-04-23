@@ -39,7 +39,7 @@ const loadSearchResult = async () => {
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
         const res = await fetch(url);
         const data = await res.json();
-        displayPhones(data.data);
+        displayPhones(data.data.slice(0 - 20));
     }
 };
 
