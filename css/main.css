@@ -21,3 +21,9 @@ body{
     width: 150px;
     height: 200px;
 }
+
+/* Display Single Phone Details */
+.no-data-found{
+    font-style: italic;
+    font-size: .8rem;
+}

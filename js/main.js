@@ -90,11 +90,11 @@ const displayPhoneDetails = phoneDetails => {
                 <p class="card-text">Brand Name: ${phoneDetails.brand}</p>
                 <h6 class="card-text">Main Features:</h6>
                 <ul>
-                    <li>Chipset: ${phoneDetails.mainFeatures.chipSet}</li>
-                    <li>Display Size: ${phoneDetails.mainFeatures.displaySize}</li>
-                    <li>Memory: ${phoneDetails.mainFeatures.memory}</li>
+                    <li>Chipset: ${phoneDetails.mainFeatures.chipSet ? phoneDetails.mainFeatures.chipSet : '<span class="no-data-found">No Data Found</span>'}</li>
+                    <li>Display Size: ${phoneDetails.mainFeatures.displaySize ? phoneDetails.mainFeatures.displaySize : '<span class="no-data-found">No Data Found</span>'}</li>
+                    <li>Memory: ${phoneDetails.mainFeatures.memory ? phoneDetails.mainFeatures.memory : '<span class="no-data-found">No Data Found</span>'}</li>
                     <li>Sensors: ${phoneDetails.mainFeatures.sensors ? phoneDetails.mainFeatures.sensors : ''}</li>
-                    <li>Storage: ${phoneDetails.mainFeatures.storage ? phoneDetails.mainFeatures.storage : ''}</li>
+                    <li>Storage: ${phoneDetails.mainFeatures.storage ? phoneDetails.mainFeatures.storage : '<span class="no-data-found">No Data Found</span>'}</li>
                 </ul>
                 <h6 class="card-text">Others:</h6>
                 <ul>
@@ -105,7 +105,7 @@ const displayPhoneDetails = phoneDetails => {
                     <li>USB: ${phoneDetails.others?.USB ? phoneDetails.others?.USB : 'No'}</li>
                     <li>WLAN: ${phoneDetails.others?.WLAN ? phoneDetails.others?.WLAN : 'No'}</li>
                 </ul>
-                <p class="card-text"><span class="fw-bold">Release Date:</span> ${phoneDetails.releaseDate ? phoneDetails.releaseDate : 'No release date found!'}</p>
+                <p class="card-text"><span class="fw-bold no-data-found">Release Date:</span> ${phoneDetails.releaseDate ? phoneDetails.releaseDate : 'No release date found!'}</p>
             </div>
         </div>
     `;
