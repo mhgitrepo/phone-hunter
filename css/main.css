@@ -2,6 +2,11 @@ body{
     overflow-x: hidden;
 }
 
+/* Preloader */
+#spinner{
+    display: none;
+}
+
 /* Error Message */
 #empty-string{
     display: none;

@@ -1,3 +1,8 @@
+// Preloader
+const preLoader = displayCss => {
+    document.getElementById('spinner').style.display = displayCss;
+};
+
 // Error Handle
 const emptryStrErr = displayCss => {
     document.getElementById('empty-string').style.display = displayCss;
@@ -5,6 +10,7 @@ const emptryStrErr = displayCss => {
 const wrongKeyword = displayCss => {
     document.getElementById('wrong-keyword').style.display = displayCss;
 };
+
 
 const loadSearchResult = async () => {
     // clear data
@@ -14,8 +20,12 @@ const loadSearchResult = async () => {
     //get search field
     const searchResult = document.getElementById('search-field');
     const searchText = searchResult.value;
+
     // clear input field
     searchResult.value = '';
+
+    // Preloader
+    preLoader('block');
 
     // error handle
     emptryStrErr('none');
@@ -23,6 +33,7 @@ const loadSearchResult = async () => {
 
     if(searchText === ''){
         emptryStrErr('block');
+        preLoader('none');
     }
     else{
         const url = `https://openapi.programming-hero.com/api/phones?search=${searchText}`;
@@ -35,9 +46,10 @@ const loadSearchResult = async () => {
 const displayPhones = phones => {
     const phonesCards = document.getElementById('display-phones');
     phonesCards.textContent = '';
-    wrongKeyword('none');
+
     if(phones.length === 0){
         wrongKeyword('block');
+        preLoader('none');
     }
     else{
         phones.forEach(phone => {
@@ -45,7 +57,7 @@ const displayPhones = phones => {
             div.classList.add('col');
             div.innerHTML = `
             <div class="card">
-                <img src="${phone.image}" class="card-img-top mx-auto mt-2 dp-img" alt="...">
+                <img src="${phone.image}" class="card-img-top mx-auto mt-4 dp-img" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">${phone.phone_name}</h5>
                     <p class="card-text">Brand Name: ${phone.brand}</p>
@@ -55,6 +67,7 @@ const displayPhones = phones => {
             `;
             phonesCards.appendChild(div);
         });
+        preLoader('none');
     }
 };
 
@@ -71,7 +84,7 @@ const displayPhoneDetails = phoneDetails => {
 
     phoneDetailsCard.innerHTML = `
         <div class="card mb-5 mx-auto">
-            <img src="${phoneDetails.image}" class="card-img-top mx-auto mt-2 dp-img" alt="...">
+            <img src="${phoneDetails.image}" class="card-img-top mx-auto mt-4 mb-3 dp-img" alt="...">
             <div class="card-body">
                 <h5 class="card-title">${phoneDetails.name}</h5>
                 <p class="card-text">Brand Name: ${phoneDetails.brand}</p>
@@ -80,11 +93,19 @@ const displayPhoneDetails = phoneDetails => {
                     <li>Chipset: ${phoneDetails.mainFeatures.chipSet}</li>
                     <li>Display Size: ${phoneDetails.mainFeatures.displaySize}</li>
                     <li>Memory: ${phoneDetails.mainFeatures.memory}</li>
-                    <li>Sensors: ${phoneDetails.mainFeatures.sensors[0]}, ${phoneDetails.mainFeatures.sensors[1]}, ${phoneDetails.mainFeatures.sensors[2]}, ${phoneDetails.mainFeatures.sensors[3]}, ${phoneDetails.mainFeatures.sensors[4]}, ${phoneDetails.mainFeatures.sensors[5]}</li>
-                    <li>Storage: ${phoneDetails.mainFeatures.storage}</li>
+                    <li>Sensors: ${phoneDetails.mainFeatures.sensors ? phoneDetails.mainFeatures.sensors : ''}</li>
+                    <li>Storage: ${phoneDetails.mainFeatures.storage ? phoneDetails.mainFeatures.storage : ''}</li>
                 </ul>
                 <h6 class="card-text">Others:</h6>
-                <p class="card-text">${phoneDetails.others}</p>
+                <ul>
+                    <li>Bluetooth: ${phoneDetails.others?.Bluetooth ? phoneDetails.others?.Bluetooth : 'No'}</li>
+                    <li>GPS: ${phoneDetails.others?.GPS ? phoneDetails.others?.GPS : 'No'}</li>
+                    <li>NFC: ${phoneDetails.others?.NFC ? phoneDetails.others?.NFC : 'No'}</li>
+                    <li>Radio: ${phoneDetails.others?.Radio ? phoneDetails.others?.Radio : 'No'}</li>
+                    <li>USB: ${phoneDetails.others?.USB ? phoneDetails.others?.USB : 'No'}</li>
+                    <li>WLAN: ${phoneDetails.others?.WLAN ? phoneDetails.others?.WLAN : 'No'}</li>
+                </ul>
+                <p class="card-text"><span class="fw-bold">Release Date:</span> ${phoneDetails.releaseDate ? phoneDetails.releaseDate : 'No release date found!'}</p>
             </div>
         </div>
     `;
