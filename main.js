@@ -14,7 +14,7 @@ const wrongKeyword = displayCss => {
 
 const loadSearchResult = async () => {
     // clear data
-    // document.getElementById('display-phones').textContent = '';
+    document.getElementById('display-phones').textContent = '';
     document.getElementById('single-phone-details').textContent = '';
 
     //get search field
